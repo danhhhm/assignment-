@@ -13,4 +13,5 @@ import java.lang.*;
 public class Car {
     private String carID;
     Brand brand;
+    int a;
 }
