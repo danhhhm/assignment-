@@ -11,5 +11,6 @@
 import java.util.*;
 import java.lang.*;
 public class Car {
-
+    private String carID;
+    Brand brand;
 }
