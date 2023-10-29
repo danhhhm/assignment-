@@ -4,15 +4,13 @@
  * and open the template in the editor.
  */
 
-/**
- *
- * @author Admin
- */
+package assignment;
+
 import java.util.*;
 import java.lang.*;
 public class Brand {
-    private String brandID, brandName, soundBrand;
-    private double price;
+    String brandID, brandName, soundBrand;
+    double price;
 
     public Brand() {
         this.brandID = "";
@@ -28,31 +26,43 @@ public class Brand {
         this.price = price;
     }
 
-    public void setUpdateBrand(String brandName, String soundBrand, double price) {
-        this.brandName = brandName;
-        this.soundBrand = soundBrand;
-        this.price = price;
+    public String getBrandID() {
+        return brandID;
+    }
+
+    public void setBrandID(String brandID) {
+        this.brandID = brandID;
     }
 
     public String getBrandName() {
         return brandName;
     }
 
+    public void setBrandName(String brandName) {
+        this.brandName = brandName;
+    }
+
     public String getSoundBrand() {
         return soundBrand;
+    }
+
+    public void setSoundBrand(String soundBrand) {
+        this.soundBrand = soundBrand;
     }
 
     public double getPrice() {
         return price;
     }
 
-    public String getBrandID() {
-        return brandID;
+    public void setPrice(double price) {
+        this.price = price;
     }
-        
+
     @Override
     public String toString() {
-        return this.getClass().getSimpleName() + ": brandID = " + brandID + ", brandName = " + brandName + ", soundBrand = " + soundBrand + ", price = " + price;
+        return "brandID=" + brandID + ", brandName=" + brandName + ", soundBrand=" + soundBrand + ", price=" + price;
     }
+    
+    
     
 }
