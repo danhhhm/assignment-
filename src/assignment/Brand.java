@@ -1,22 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package assignment;
 
 import java.util.*;
 import java.lang.*;
 public class Brand {
-    String brandID, brandName, soundBrand;
+    String brandID;
+    private String brandName;
+    private String soundBrand;
     double price;
 
     public Brand() {
-        this.brandID = "";
-        this.brandName = "";
-        this.soundBrand = "";
-        this.price = 0;
     }
 
     public Brand(String brandID, String brandName, String soundBrand, double price) {
@@ -60,7 +53,7 @@ public class Brand {
 
     @Override
     public String toString() {
-        return "brandID=" + brandID + ", brandName=" + brandName + ", soundBrand=" + soundBrand + ", price=" + price;
+        return  "brandID=" + brandID + ", brandName=" + brandName + ", soundBrand=" + soundBrand + ", price=" + price + '}';
     }
     
     
