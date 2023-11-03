@@ -7,57 +7,45 @@
 package assignment;
 
 import Extend.Extensions;
+import Extend.FileIO;
 import java.awt.Menu;
 import java.io.*;
 import java.util.*;
 
-public class BrandList extends ArrayList<Brand> {
+public class BrandList {
 
-    private String brandID, brandName, soundBrand;
-    private double price;
-    private Scanner sc = new Scanner(System.in);
+    private ArrayList<Brand> brandList;
+    
 
     public BrandList() {
+        brandList = new ArrayList<Brand>();
     }
 
-    public boolean loadFromFile(String filename) {
-        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
-            String[] arr;
-            String line = br.readLine();
-            while ((line != null)) {
-                arr = line.split(",");
-                brandID = arr[0].trim();
-                brandName = arr[1].trim();
-                soundBrand = arr[2].split(":")[0].trim();
-                price = Double.parseDouble(arr[2].split(":")[1].trim());
-                this.add(new Brand(brandID, brandName, soundBrand, price));
-                line = br.readLine();
-            }
-            br.close();
-            return true;
-        } catch (IOException e) {
-            System.out.println("File " + filename + " not found !");
+    public void loadFromFile(String filename) {
+        String data = FileIO.readFile(filename);
+        String[] arr = data.split("\n");
+        brandList.removeAll(brandList);
+        for(int i=0;i <arr.length;i++) {
+            String[] brandData = arr[i].split("\\|");
+            brandList.add(new Brand(brandData[0], brandData[1], brandData[2], Double.valueOf(brandData[3])));
         }
-        return false;
     }
+    
 
-    public boolean saveToFile(String fileName) {
-        try {
-            PrintWriter pw = new PrintWriter(new FileWriter(fileName));
-            for (Brand i : this) {
-                pw.println(i);
-            }
-            pw.close();
-            return true;
-        } catch (IOException e) {
-            e.printStackTrace();
+    public boolean saveToFile(String filename) {
+        boolean result = false;
+        FileIO.writeFile(filename, "");
+        for(int i=0;i<brandList.size();i++) {
+            String s = brandList.get(i).getBrandID() + "|" + brandList.get(i).getBrandName()
+                    + "|" +brandList.get(i).getSoundBrand() + "|" + brandList.get(i).getPrice() + "\n";
+            result = FileIO.appendFile(filename, s);
         }
-        return false;
+        return result;
     }
 
     public int searchID(String bID) {
-        for (int i = 0; i < this.size(); i++) {
-            if (bID.equals(this.get(i).getBrandID())) {
+        for (int i = 0; i < brandList.size(); i++) {
+            if (bID.equals(brandList.get(i).getBrandID().equals(bID))) {
                 return i;
             }
         }
@@ -70,20 +58,20 @@ public class BrandList extends ArrayList<Brand> {
     }
 
     public void addBrand() {
-        boolean checkBrandID = false;
+        String brandID = Extensions.getString("Enter brand ID: ");
+        int pos = searchID(brandID);
         do {
             System.out.println("Input brand ID: ");
-            brandID = sc.nextLine();
             for(int i=0;i<this.size();i++){
                 if(brandID.equals(this.get(i).getBrandID())) {
-                    checkBrandID = true;
+                    pos = true;
                     System.out.println("This brand ID is existed. Try another one!");
                     break;
                 } else {
-                    checkBrandID=false;
+                    pos=false;
                 }
             }
-        } while(checkBrandID == true);
+        } while(pos == true);
         
         brandName = Extensions.getString("Input brand name: ");
         soundBrand = Extensions.getString("Input sound brand: ");
