@@ -3,20 +3,32 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package assignment;
 
 import java.util.*;
 import java.lang.*;
+
 public class Menu {
-    public static int getChoice(Object[] option){
-        for(int i = 0; i<option.length; i++){
-            System.out.println(((i+1) + "-" + option[i]));
+    private Scanner sc = new Scanner(System.in);
+    
+    public int int_getChoice(ArrayList<Brand> options) {
+        int maxOp = options.size();
+        int response;
+        for (int i = 0; i < maxOp; i++) {
+            System.out.println((i + 1) + ". " + options.get(i));
         }
-        System.out.println("Choice 1.." + option.length + ": ");
-        Scanner sc = new Scanner(System.in);
-        return Integer.parseInt(sc.nextLine());
+        String input = "Please chose an option {1..." + maxOp + "}.";
+        response = sc.nextInt();
+        return response;
     }
-    
-    
+
+    public Brand ref_getChoice(ArrayList<Brand> options) {
+        int maxOp = options.size();
+        int response;
+        System.out.println("BrandID list: ");
+        do {
+            response = int_getChoice(options);
+        } while (response > maxOp || response < 0);
+        return options.get(response - 1);
+    }
 }
