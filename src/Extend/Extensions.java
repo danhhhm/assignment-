@@ -102,5 +102,30 @@ public class Extensions {
         return num;
     }
     
-    
+    public static String genRandomBrandID() {
+        Random rand = new Random();
+        int randInt = 10000 + rand.nextInt(90000); // Random 5-digit number
+        return "B" + randInt;
+    }
+
+    public static String genRandomBrandName() {
+        String[] brandNames = { "Toyota", "Honda", "Ford", "Chevrolet", "Nissan", "Hyundai", "Volkswagen", "BMW" };
+        Random rand = new Random();
+        int randIndex = rand.nextInt(brandNames.length);
+        return brandNames[randIndex];
+    }
+
+    public static String genRandomSoundBrand() {
+        String[] soundBrands = { "Bose", "Harman Kardon", "JBL", "Sony", "Pioneer" };
+        Random rand = new Random();
+        int randIndex = rand.nextInt(soundBrands.length);
+        return soundBrands[randIndex];
+    }
+
+    public static double genRandomPrice() {
+        Random rand = new Random();
+        double minPrice = 10000.0;
+        double maxPrice = 50000.0;
+        return minPrice + (maxPrice - minPrice) * rand.nextDouble();
+    }
 }
