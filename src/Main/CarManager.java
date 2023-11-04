@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Main;
+
 import Extend.Extensions;
 import assignment.BrandList;
 import assignment.CarList;
@@ -11,31 +12,33 @@ import assignment.Menu;
 import java.lang.*;
 import java.util.*;
 import java.math.*;
-public class Assignment {
+
+public class CarManager {
 
     public static void main(String[] args) {
+        Menu menu = new Menu("Car Manager Application");
         boolean isrun = true;
         int choice;
         BrandList brandList = new BrandList();
         CarList carList = new CarList();
-        String[] options = {
-            "List all brands",
-            "Add a new brand",
-            "Search a brand based on its ID",
-            "Update a brand",
-            "Save brands to the file",
-            "List all cars in ascending order of brand names",
-            "List cars based on a part of an input brand name",
-            "Add a car",
-            "Remove a car based on its ID",
-            "Update a car based on its ID",
-            "Save cars to file, named cars.txt",
-            "Load brand from file",
-            "Load car from file",
-            "Quit the program"};
-
+        Menu options = new Menu();
+        options.addOptions("List all brands");
+        options.addOptions("Add a new brand");
+        options.addOptions("Search a brand based on its ID");
+        options.addOptions("Update a brand");
+        options.addOptions("Save brands to the file");
+        options.addOptions("List all cars in ascending order of brand names");
+        options.addOptions("List cars based on a part of an input brand name");
+        options.addOptions("Add a car");
+        options.addOptions("Remove a car based on its ID");
+        options.addOptions("Update a car based on its ID");
+        options.addOptions("Save cars to file, named cars.txt");
+        options.addOptions("Load brand from file");
+        options.addOptions("Load car from file");
+        options.addOptions("Quit the program");
         do {
-            choice = Menu.getChoice(options);
+            menu.printMenu();
+            choice = Menu.int_getChoice();
             switch (choice) {
                 case 1:
                     brandList.listBrands();
@@ -82,11 +85,11 @@ public class Assignment {
                     Extensions.getString("Press Enter to continue");
                     break;
                 case 12:
-                    brandList.loadFromFile("Brand.txt");
+                    brandList.loadFromFile("E:\\JavaProject\\Assignment\\src\\assignment\\Brand.txt");
                     Extensions.getString("Press Enter to continue");
                     break;
                 case 13:
-                    carList.loadFromFile("Cars.txt");
+                    carList.loadFromFile("E:\\JavaProject\\Assignment\\src\\assignment\\Cars.txt");
                     Extensions.getString("Press Enter to continue");
                     break;
                 case 14:
