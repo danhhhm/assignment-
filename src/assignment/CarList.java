@@ -19,6 +19,9 @@ public class CarList {
     private ArrayList<Car> carList;
     BrandList brandList;
 
+    public CarList() {
+    }
+
     public CarList(ArrayList<Car> carList, BrandList bList) {
         this.carList = carList;
         this.brandList = bList;
@@ -97,15 +100,20 @@ public class CarList {
     public void addCar() {
         int pos;
         String carID,engineID,frameID;
-        do {
-            carID = Extensions.getID("Enter car ID: ");
+         while (true) {
+            carID = Extensions.getString("Enter Car ID: ");
             pos = searchID(carID);
-            if(pos >= 0) {
-                System.out.println("This car ID is  existed. Try another one!");
+            if (carID.equals("exit")) {
+                return;
             }
-        } while(pos != -1);
-        
-        Brand brand = menu.ref_getChoice(brandList);
+            if (pos != -1) {
+                System.out.println("Car  ID already exists!");
+                System.out.println("Please try again! or enter exit to return MainMenu!");
+            } else {
+                break;
+            }
+        }
+        Brand newBrand = brandList.getUserChoice();
         String color = Extensions.getID("Enter color: ");
         do {
              frameID = Extensions.getID("Enter framID: ");
@@ -121,11 +129,71 @@ public class CarList {
                 System.out.println("This engine ID is existed. Try another one!");
             }
         } while (pos != -1);
-        carList.add(new Car(carID, brand, color, frameID, engineID));
+        carList.add(new Car(carID, newBrand, color, frameID, engineID));
         System.out.println("Car has been added successfully!");
     }
     
     public void printBasedBrandName() {
-        
+        String aPartOfBrandName = Extensions.getString("Enter brand name: ");
+        int count =0;
+        for(int i=0;i <carList.size();i++) {
+            Car car = carList.get(i);
+            if(car.getBrand().getBrandID().contains(aPartOfBrandName)) {
+                System.out.println(car);
+                count++;
+            }
+        }
+        if(count == 0 ) {
+            System.out.println("No car is detected.");
+        }
+    }
+    public boolean removeCar() {
+        int pos;
+        String removeID;
+        removeID = Extensions.getString("Enter removeID: ");
+        pos = searchID(removeID);
+        if(pos >= 0) {
+            carList.remove(pos);
+            System.out.println("Car has been removed successfully!");
+            return true;
+        }else{
+            System.out.println("Not found!");
+        }
+        return false;
+    }
+    public void updateCar() {
+        String updateID = Extensions.getString("Enter ID you need to update: ");
+        int pos = searchID(updateID);
+        if(pos <0) {
+            System.out.println("CarID: " +updateID+" is not found!");
+        } else {
+            Brand newBrand = brandList.getUserChoice();
+            String newBrandID = newBrand.getBrandID();
+            String updateColor = Extensions.getString("Enter new color: ");
+            String updateFrameID = Extensions.getString("Enter new frameID: ");
+            String updateEngineID = Extensions.getString("Enter new engineID: ");
+            Car car = new Car(updateID, newBrand, updateColor, updateID, updateID);
+            carList.set(pos, car);
+            System.out.println("Car updated successfully!");
+        }
+    }
+    public void listCars() {
+        Collections.sort(carList, new Comparator<Car>() {
+            @Override
+            public int compare(Car o1, Car o2) {
+                return o2.getBrand().getBrandName().compareToIgnoreCase(o1.getBrand().getBrandName());
+            }
+        });
+        int i = 1;
+        System.out.println(String.format("%-5s. || %-10s || %-15s || %-15s || %-15s || %-15s", "STT", "CarID", "BrandID", "Color", "FrameID", "EngineID"));
+        for (Car c : carList) {
+            System.out.println(String.format("%-5s. || %-10s || %-15s || %-15s || %-15s || %-15s",
+                    i, c.getCarID(), c.getBrand().getBrandID(), c.getColor(),  c.getFrameID(), c.getEngineID()   ));
+            i++;
+        }
+    }
+
+    public void listCarsByBrand() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

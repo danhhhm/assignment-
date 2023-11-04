@@ -53,7 +53,7 @@ public class Brand {
 
     @Override
     public String toString() {
-        return  "brandID=" + brandID + ", brandName=" + brandName + ", soundBrand=" + soundBrand + ", price=" + price + '}';
+        return  "brandID= " + brandID + ", brandName= " + brandName + ", soundBrand= " + soundBrand + ", price= " + price ;
     }
     
     

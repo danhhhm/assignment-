@@ -15,11 +15,13 @@ import java.util.*;
 public class BrandList {
 
     private ArrayList<Brand> brandList;
-    
+    private Scanner sc = new Scanner(System.in);
+
 
     public BrandList() {
         brandList = new ArrayList<Brand>();
     }
+    
 
     public void loadFromFile(String filename) {
         String data = FileIO.readFile(filename);
@@ -43,6 +45,17 @@ public class BrandList {
         return result;
     }
 
+    public void genRandomBrand() {
+        System.out.println("Enter the brand numbers you want to generate: ");
+        int num = sc.nextInt();
+        for(int i=0;i<num;i++) {
+            String brandID = Extensions.genRandomBrandID();
+            String branName = Extensions.genRandombranName();
+            String soundBrand =  Extensions.genRandomsoundBrand();
+            double price = Extensions.genRandomPrice();
+        }
+        System.out.println(num + " brand(s) has been generated!");
+    }
     public int searchID(String bID) {
         for (int i = 0; i < brandList.size(); i++) {
             if (bID.equals(brandList.get(i).getBrandID().equals(bID))) {
@@ -53,48 +66,80 @@ public class BrandList {
     }
 
     public Brand getUserChoice() {
-        Menu mnu = new Menu();
-        return (Brand) mnu.ref_getChoice(this);
+        int i = 1;
+        System.out.println(String.format("%-5s. || %-15s || %-40s || %-20s || %-10s", "STT", "BrandID", "BrandName", "SoundBrand", "Price"));
+        for (Brand b : brandList) {
+            System.out.println(String.format("%-5s. || %-15s || %-40s || %-20s || %-10s", i, b.getBrandID(), b.getBrandName(), b.getSoundBrand(), b.getPrice()));
+            i++;
+        }
+        int choice = Extensions.getInt("Choose a new brand: ", 1, brandList.size());
+        return brandList.get(choice - 1);
     }
-
     public void addBrand() {
-        String brandID = Extensions.getString("Enter brand ID: ");
-        int pos = searchID(brandID);
+        String brandID;
+        int pos;
         do {
-            System.out.println("Input brand ID: ");
-            for(int i=0;i<this.size();i++){
-                if(brandID.equals(this.get(i).getBrandID())) {
-                    pos = true;
+             brandID = Extensions.getString("Enter brand ID: ");
+             pos = searchID(brandID);
+             if(brandID.equals("exit"))
+                if(pos == -1) {
                     System.out.println("This brand ID is existed. Try another one!");
-                    break;
+                    System.out.println("Please try again! or input exit to return MainMenu!");
                 } else {
-                    pos=false;
+                    break;
                 }
-            }
-        } while(pos == true);
+           
+        } while(true);
         
-        brandName = Extensions.getString("Input brand name: ");
-        soundBrand = Extensions.getString("Input sound brand: ");
-        price = Extensions.getPrice("Input price: ", 0, 100000);
-        this.add(new Brand(brandID, brandName, soundBrand, price));
+        String brandName = Extensions.getString("Input brand name: ");
+        String soundBrand = Extensions.getString("Input sound brand: ");
+        double price = Extensions.getPrice("Input price: ", 0, 100000);
+        brandList.add(new Brand(brandID, brandName, soundBrand, price));
         
         System.out.println("Brand has been added successfully");
     }
+    public void searchBrand() {
+        String ID = Extensions.getString("Enter ID of brand you want to search: ");
+        for (int i = 0; i < brandList.size(); i++) {
+            if (brandList.get(i).getBrandID().equals(ID)) {
+                System.out.println("Found: " + brandList.get(i).toString());
+                return;
+            }
+        }
+        System.out.println("Not found Brand with ID" + ID);
+    }
     public void updateBrand() {
-        brandID = Extensions.getID("Input brandID: ");
+        String brandID = Extensions.getID("Input brandID: ");
         int pos = searchID(brandID);
         if(pos == -1 ) {
             System.out.println("Not found");
         } else {
-            brandName = Extensions.getString("Input brand name: ");
-            soundBrand = Extensions.getString("Input sound brand: ");
-            price = Extensions.getPrice("Input price: ", 0D, 100000000000D);
+            String brandName = Extensions.getString("Input brand name: ");
+            String soundBrand = Extensions.getString("Input sound brand: ");
+            double price = Extensions.getPrice("Input price: ", 0D, 100000000000D);
             Brand brand = new Brand(brandID, brandName, soundBrand, price);
-            this.add(pos, brand);
+            brandList.add(pos, brand);
             System.out.println("Brand updated successfully!");
         }
         
     }
     
+    
+     public Brand getBrand(String brandID) {
+        int pos = searchID(brandID);
+        if (pos == -1) {
+            return null;
+        } else {
+            return brandList.get(pos);
+        }
+    }
+    public void listBrands() {
+        int i = 1;
+        System.out.println(String.format("%-5s. || %-15s || %-40s || %-20s || %-10s", "STT", "BrandID", "BrandName", "SoundBrand", "Price"));
+        for (Brand b : brandList) {
+            System.out.println(String.format("%-5s. || %-15s || %-40s || %-20s || %-10s", i, b.getBrandID(), b.getBrandName(), b.getSoundBrand(), b.getPrice()));
+            i++;
+        }
+    }
 
 }
