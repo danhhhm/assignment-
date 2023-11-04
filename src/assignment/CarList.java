@@ -194,6 +194,20 @@ public class CarList {
     }
 
     public void listCarsByBrand() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    Scanner scanner = new Scanner(System.in);
+    System.out.print("Input brand: ");
+    String brandCarID = scanner.nextLine();
+
+    int count = 0;
+    for (Car car : carList) {
+        if (car.getBrand().getBrandID().equals(brandCarID)) {
+            System.out.println(car.screenString());
+            count++;
+        }
     }
+
+    if (count == 0) {
+        System.out.println("No cars found for the specified brand.");
+    }
+}
 }
