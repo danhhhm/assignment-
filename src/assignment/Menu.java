@@ -10,23 +10,26 @@ import Extend.Extensions;
 import java.util.*;
 import java.lang.*;
 public class Menu {
-     public static int getChoice(Object[] option) {
-        int i = 0;
-        for (Object object : option) {
-            i++;
-            System.out.println(i + "-" + object);
+    private static Scanner sc = new Scanner(System.in);
+    public static int int_getChoice(ArrayList<Brand > options) {
+        int maxOp = options.size();
+        int response;
+        for (int i = 0; i < maxOp; i++) {
+            System.out.println((i+1) + ". " + options.get(i));
         }
-
-        int choice = Extensions.menuChoice("Choose 1.." + option.length+"\n", 1, option.length);
-
-        return choice;
+        System.out.println("Please chose an option [1..." + maxOp + "].");
+        response = sc.nextInt();
+        return response;
     }
     
-    public static Object ref_getChoice(ArrayList<Object> option){
-
-       Object[] brandarr = option.toArray();
-       int choice = getChoice(brandarr);
-       return option.get(choice-1);
+    public static Object ref_getChoice(ArrayList<Brand> options){
+        int maxOp = options.size();
+        int response;
+        System.out.println("BrandID list: ");
+        do {            
+            response = int_getChoice(options);
+        } while (response < 0 || response > maxOp);
+        return options.get(response-1);
     }
     
 }
