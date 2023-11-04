@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Extend;
 
 /**
@@ -12,64 +11,68 @@ package Extend;
  */
 import java.util.*;
 import java.lang.*;
+
 public class Extensions {
+
     private final static Scanner sc = new Scanner(System.in);
-    
+
     public static String getString(String inputString) {
         String str;
-        while(true) {
+        while (true) {
             System.out.println(inputString);
             str = sc.nextLine().trim();
-            if(str.length()==0|| str.isEmpty()) {
+            if (str.length() == 0 || str.isEmpty()) {
                 System.out.println("The input string must not be null. Please try again!");
             } else {
                 return str;
             }
         }
     }
+
     public static double getPrice(String inputPrice, double min, double max) {
         double num;
-        while(true){
-            try{
+        while (true) {
+            try {
                 System.out.println(inputPrice);
-                num = sc.nextDouble(); 
+                num = sc.nextDouble();
                 sc.nextLine();
-                if(num>=min && num <= max) {
+                if (num >= min && num <= max) {
                     break;
                 } else {
-                    System.out.println("Error: InputPrice must be between: "+min+ " and " +max+". Please try again!");
+                    System.out.println("Error: InputPrice must be between: " + min + " and " + max + ". Please try again!");
                 }
-                
-            } catch(Exception e) {
+
+            } catch (Exception e) {
                 System.out.println("Price must be real number");
-            }   
+            }
         }
         return num;
     }
-    
+
     public static String getID(String inputID) {
         String id;
-        while(true) {
+        while (true) {
             System.out.println(inputID);
-        id = sc.nextLine().trim().toUpperCase();
-        if(id.length()==0 || id.isEmpty()){
-            System.out.println("The ID must not be null. Try again!");
-        } else {
-            return id;
-        }
+            id = sc.nextLine().trim().toUpperCase();
+            if (id.length() == 0 || id.isEmpty()) {
+                System.out.println("The ID must not be null. Try again!");
+            } else {
+                return id;
+            }
         }
     }
+
     public static int getInt(String inputInt, int min, int max) {
         int num;
-        while(true) {
+        while (true) {
             try {
                 System.out.println(inputInt);
                 num = sc.nextInt();
                 sc.nextLine();
-                if(num >= min && num <= max) {
+                if (num >= min && num <= max) {
                     break;
                 } else {
-                    System.err.println("Input must be between: " +min+ " and " +max+ "Please try again!");
+                    System.err.println("Input must be between: " + min + " and " + max + "Please try again!");
                 }
             } catch (Exception e) {
                 System.err.println("you must enter a integer.Please try again!");
@@ -78,14 +81,15 @@ public class Extensions {
         }
         return num;
     }
-    public static int menuChoice(String input,int min, int max) {
+
+    public static int menuChoice(String input, int min, int max) {
         int num;
-        while(true) {
+        while (true) {
             try {
                 System.out.println(input);
                 num = sc.nextInt();
                 sc.nextLine();
-                if(num >= min && num <= max) {
+                if (num >= min && num <= max) {
                     break;
                 } else {
                     System.out.println("");
@@ -97,5 +101,6 @@ public class Extensions {
         }
         return num;
     }
+    
+    
 }
-

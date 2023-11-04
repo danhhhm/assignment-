@@ -26,6 +26,18 @@ public class Menu {
         list.add(options);
     }
 
+    public void printMenu() {
+        if (list.isEmpty()) {
+            System.out.println("There is no item in the menu");
+            return;
+        }
+        System.out.println("\n------------------------------------");
+        System.out.println(input);
+        for (String output : list) {
+            System.out.println(output);
+        }
+    }
+
     public static int int_getChoice() {
         int maxOp = list.size();
         int response;
@@ -36,7 +48,7 @@ public class Menu {
         response = sc.nextInt();
         return response;
     }
-    
+
     public static int int_getChoice(ArrayList<Brand> options) {
         int maxOp = options.size();
         int response;
