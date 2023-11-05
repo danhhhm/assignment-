@@ -126,10 +126,10 @@ public class Extensions {
         Random rand = new Random();
         double minPrice = 10000.0;
         double maxPrice = 50000.0;
-        double randomPrice = minPrice + (maxPrice - minPrice) * rand.nextDouble();
-        
+        double randomPrice = minPrice + (maxPrice - minPrice) * rand.nextDouble(); // tạo random price
         double roundedPrice = Math.round(randomPrice * 100.0) / 100.0;
-
+        // nhân random price với 100 để làm phần thập phân về phần nguyên rồi sử dụng math.round để làm tròn giá trị rồi chia cho 100 để về giá trị ban đầu
+        // ví dụ như là 32,343 x 100 = 3234,3 thì math.round sẽ làm tròn về 3234 rồi chia lại cho 100 sẽ ra 32,34. 
     return roundedPrice;
     }
      
