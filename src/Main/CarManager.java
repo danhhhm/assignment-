@@ -38,12 +38,12 @@ public class CarManager {
         options.addOptions("generate new random brand!!");
         options.addOptions("Quit the program");
         do {
-            menu.printMenu();
+            /*menu.printMenu();*/
             choice = Menu.int_getChoice();
             switch (choice) {
                 case 1:
                     brandList.listBrands();
-                    Extensions.getString("Press Enter to continue");
+                    /*Extensions.getString("Press Enter to continue");*/
                     break;
                 case 2:
                     brandList.addBrand();
