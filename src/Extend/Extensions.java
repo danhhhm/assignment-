@@ -126,7 +126,11 @@ public class Extensions {
         Random rand = new Random();
         double minPrice = 10000.0;
         double maxPrice = 50000.0;
-        return minPrice + (maxPrice - minPrice) * rand.nextDouble();
+        double randomPrice = minPrice + (maxPrice - minPrice) * rand.nextDouble();
+        
+        double roundedPrice = Math.round(randomPrice * 100.0) / 100.0;
+
+    return roundedPrice;
     }
      
     
