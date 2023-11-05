@@ -35,6 +35,7 @@ public class CarManager {
         options.addOptions("Save cars to file, named cars.txt");
         options.addOptions("Load brand from file");
         options.addOptions("Load car from file");
+        options.addOptions("generate new random brand!!");
         options.addOptions("Quit the program");
         do {
             menu.printMenu();
@@ -93,6 +94,9 @@ public class CarManager {
                     Extensions.getString("Press Enter to continue");
                     break;
                 case 14:
+                    brandList.genRandomBrand();
+                    break;
+                case 15:
                     System.exit(0);
                 default:
                     System.out.println("Invalid choice. Please choose again.");

@@ -128,4 +128,6 @@ public class Extensions {
         double maxPrice = 50000.0;
         return minPrice + (maxPrice - minPrice) * rand.nextDouble();
     }
+     
+    
 }

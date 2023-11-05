@@ -46,9 +46,12 @@ public class BrandList extends ArrayList<Brand> {
         int num = sc.nextInt();
         for (int i = 0; i < num; i++) {
             String brandID = Extensions.genRandomBrandID();
-            String branName = Extensions.genRandombranName();
-            String soundBrand = Extensions.genRandomsoundBrand();
+            String brandName = Extensions.genRandomBrandName();
+            String soundBrand = Extensions.genRandomSoundBrand();
             double price = Extensions.genRandomPrice();
+            
+            Brand brand = new Brand(brandID, brandName, soundBrand, price);
+            brandList.add(brand);
         }
         System.out.println(num + " brand(s) has been generated!");
     }
