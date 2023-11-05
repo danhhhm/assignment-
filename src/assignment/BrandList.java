@@ -77,28 +77,33 @@ public class BrandList extends ArrayList<Brand> {
     }
 
     public void addBrand() {
-        String brandID;
-        int pos;
-        do {
-            brandID = Extensions.getString("Enter brand ID: ");
-            pos = searchID(brandID);
-            if (brandID.equals("exit")) {
-                if (pos == -1) {
-                    System.out.println("This brand ID is existed. Try another one!");
-                    System.out.println("Please try again! or input exit to return MainMenu!");
-                } else {
-                    break;
-                }
+    while (true) {
+        String brandID = Extensions.getString("Enter brand ID (or 'exit' to return to the main menu): ");
+
+        if (brandID.equals("exit")) {
+            System.out.println("Brand addition canceled.");
+            break;
+        }
+
+        int pos = searchID(brandID);
+        if (pos != -1) {
+            System.out.println("This brand ID already exists. Try another one!");
+        } else {
+            String brandName = Extensions.getString("Enter brand name: ");
+            String soundBrand = Extensions.getString("Enter sound brand: ");
+            double price = Extensions.getPrice("Enter price: ", 0, 100000);
+
+            if (price <= 0) {
+                System.out.println("Price must be a positive number. Please try again.");
+                continue;
             }
 
-        } while (true);
-
-        String brandName = Extensions.getString("Input brand name: ");
-        String soundBrand = Extensions.getString("Input sound brand: ");
-        double price = Extensions.getPrice("Input price: ", 0, 100000);
-        brandList.add(new Brand(brandID, brandName, soundBrand, price));
-
-        System.out.println("Brand has been added successfully");
+            // Create and add the new brand to the list
+            Brand newBrand = new Brand(brandID, brandName, soundBrand, price);
+            brandList.add(newBrand);
+            System.out.println("Brand added successfully!");
+            break;
+        }
     }
 
     public void searchBrand() {
