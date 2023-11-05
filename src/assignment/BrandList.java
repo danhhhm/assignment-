@@ -203,7 +203,7 @@ public class BrandList extends ArrayList<Brand> {
         
         System.out.println("Do you want to sort the brands?");
         System.out.println("Chose(ID/Price/No): ");
-        String fieldChoice = sc.nextLine();
+        String fieldChoice = sc.next();
         if (fieldChoice.equals("ID")) {
             Collections.sort(brandList, (b1, b2) -> b1.getBrandID().compareTo(b2.getBrandID()));
             //b1 b2 là đối tượng được generate từ random brand, b1.getBrandId là lấy id b1 so sánh với id b2
@@ -211,14 +211,18 @@ public class BrandList extends ArrayList<Brand> {
             //
         } else if (fieldChoice.equals("Price")) {
             Collections.sort(brandList, (b1, b2) -> Double.compare(b1.getPrice(), b2.getPrice()));
-        } else {
-            System.out.println("Brand have not been sorted.");
-            
+        } else if (fieldChoice.equals("no")) {
+        System.out.println("Brands have not been sorted.");
+        return;
         }
+        else {
+            System.out.println("Brand have not been sorted.");
+            return;
+        }  
     
         System.out.println("Do you want to sort in increasing or decreasing order?");
         System.out.println("Chose(inc/dec): ");
-        String orderChoice = sc.nextLine(); // Dòng này xóa bộ đệm (buffer) của Scanner.
+        String orderChoice = sc.next(); // Dòng này xóa bộ đệm (buffer) của Scanner.
         // "asc" (tăng dần) hoặc "desc" (giảm dần). 
         //orderChoice = scanner, nó sẽ đợi người dùng nhập một chuỗi từ bàn phím và sau đó trả về chuỗi đó. Chuỗi này sau đó được gán cho biến orderChoice
         if (orderChoice.equals("inc")) {
