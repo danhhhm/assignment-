@@ -118,7 +118,7 @@ public class CarList extends ArrayList<Car> {
         System.out.println(numberOfGenerations + " random car(s) has been generated");
     }
 
-   public void addCar() {
+   public void addCar() { // hàm để thêm một chiếc xe vào danh sách xe - Dev By Bùi Quang Việt
 //        for (int i = 0; i < 50; i++) {
 //            carList.add(GeneratorInstant.generateRandomCar("C" + String.valueOf(i), listBrand));
 //        }
@@ -149,7 +149,7 @@ public class CarList extends ArrayList<Car> {
     }
 
     
-    public void printBasedBrandName() {
+    public void printBasedBrandName() { //hàm dùng để in ra các xe có tên thương hiệu chứa một chuỗi ký tự nhất định trong danh sách - Dev By Bùi Quang Việt
         String aPartOfBrandName = Extensions.getString("Enter brand name: ");
         int count =0;
         for(int i=0;i <this.size();i++) {
@@ -163,7 +163,7 @@ public class CarList extends ArrayList<Car> {
             System.out.println("No car is detected.");
         }
     }
-    public boolean removeCar() {
+    public boolean removeCar() { //hàm dùng để xóa bỏ một chiếc xe khỏi danh sách - Dev By Bùi Quang Việt
         int pos;
         String removeID;
         removeID = Extensions.getString("Enter removeID: ");
@@ -177,7 +177,7 @@ public class CarList extends ArrayList<Car> {
         }
         return false;
     }
-    public void updateCar() {
+    public void updateCar() { //hàm dùng đẻ cập nhật thông tin của một chiếc xe trong danh sách xe - Dev By Bùi Quang Việt
         String updateID = Extensions.getString("Enter ID you need to update: ");
         int pos = searchID(updateID);
         if(pos <0) {
@@ -193,7 +193,7 @@ public class CarList extends ArrayList<Car> {
             System.out.println("Car updated successfully!");
         }
     }
-    public void listCars() {
+    public void listCars() { //hàm dùng đẻ liệt kê tất cả các xe trong danh sách xe - Dev By Bùi Quang Việt
         Collections.sort(this, new Comparator<Car>() {
             @Override
             public int compare(Car o1, Car o2) {
