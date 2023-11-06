@@ -109,15 +109,62 @@ public class BrandList extends ArrayList<Brand> {
         System.out.println("Brand has been added successfully");
     }
 
-    public void searchBrand() {
-        String ID = Extensions.getString("Enter ID of brand you want to search: ");
-        for (int i = 0; i < this.size(); i++) {
-            if (this.get(i).getBrandID().equals(ID)) {
-                System.out.println("Found: " + this.get(i).toString());
-                return;
+    public void search() {
+        List<Brand> matchingBrands = new ArrayList<>();
+        System.out.println("Do you want to search for ID, name, sound, or price: ");
+        String Choice = sc.next();
+        if (Choice.equalsIgnoreCase("ID")) {
+            String ID = Extensions.getString("Enter ID of brand you want to search: ");
+            for (int i = 0; i < this.size(); i++) {
+                if (this.get(i).getBrandID().equals(ID)) {
+                    System.out.println("Found: " + this.get(i).toString());
+                    return;
+                }
+            }
+            System.out.println("Not found Brand with ID" + ID);
+        } else if (Choice.equalsIgnoreCase("name")) {
+            String name = Extensions.getString("Enter name of brand you want to search: ");
+            for (int i = 0; i < this.size(); i++) {
+                if (this.get(i).getBrandName().equals(name)) {
+                    System.out.println("Found: " + this.get(i).toString());
+                    return;
+                }
+            }
+
+        } else if (Choice.equalsIgnoreCase("sound")) {
+            String sound = Extensions.getString("Enter the sound of brand you want to search: ");
+            for (int i = 0; i < this.size(); i++) {
+                if (this.get(i).getSoundBrand().contains(sound)) {
+                    matchingBrands.add(this.get(i));
+                }
+            }
+            if (matchingBrands.isEmpty()) {
+                System.out.println("No matching brands found.");
+            } else {
+                System.out.println("Found matching brands:");
+                for (Brand matchingBrand : matchingBrands) {
+                    System.out.println(matchingBrand.toString());
+                }
+            }
+        } else if (Choice.equalsIgnoreCase("price")) {
+            double minPrice = Extensions.getDouble("Enter the minimum price: ");
+            double maxPrice = Extensions.getDouble("Enter the maximum price: ");
+            for (int i = 0; i < this.size(); i++) {
+                double price = this.get(i).getPrice();
+                if (price >= minPrice && price <= maxPrice) {
+                    matchingBrands.add(this.get(i));
+                }
+            }
+            if (matchingBrands.isEmpty()) {
+                System.out.println("No matching brands found.");
+            } else {
+                System.out.println("Found matching brands:");
+                for (Brand matchingBrand : matchingBrands) {
+                    System.out.println(matchingBrand.toString());
+                }
             }
         }
-        System.out.println("Not found Brand with ID" + ID);
+
     }
 
     

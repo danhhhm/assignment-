@@ -21,7 +21,7 @@ public class Main {
         String[] options = {
             "List all brands",
             "Add a new brand",
-            "Search a brand based on its ID",
+            "Search a brand based on its ID, name, sound, or price",
             "Update a brand",
             "Save brands to the file",
             "Generate random Brands",
@@ -46,7 +46,7 @@ public class Main {
                     Extensions.getString("Press Enter to continue");
                     break;
                 case 3:
-                    brandList.searchBrand();
+                    brandList.search();
                     Extensions.getString("Press Enter to continue");
                     break;
                 case 4:
