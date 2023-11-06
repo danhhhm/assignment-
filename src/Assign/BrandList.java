@@ -149,7 +149,7 @@ public class BrandList extends ArrayList<Brand> {
                     System.out.println(matchingBrand.toString());
                 }
             }
-        } else if (Choice.equalsIgnoreCase("price")) {
+        } else if (Choice.equalsIgnoreCase("Price")) {
             double minPrice = Extensions.getDouble("Enter the minimum price: ");
             double maxPrice = Extensions.getDouble("Enter the maximum price: ");
             for (int i = 0; i < this.size(); i++) {
@@ -198,6 +198,11 @@ public class BrandList extends ArrayList<Brand> {
     }
 
     public void listBrands() {
+        if (this.isEmpty()) {
+        System.out.println("No brands to display.");
+        // Thực hiện các hành động khác nếu cần
+        return; // Thoát ra khỏi phương thức nếu danh sách rỗng
+    }
         int i = 1;
         System.out.println(String.format("%-5s. || %-15s || %-20s || %-20s || %-10s", "STT", "BrandID", "BrandName", "SoundBrand", "Price"));
         for (Brand b : this) {
@@ -212,7 +217,7 @@ public class BrandList extends ArrayList<Brand> {
             //b1 b2 là đối tượng được generate từ random brand, b1.getBrandId là lấy id b1 so sánh với id b2
             //Dùng Collections.sort để sắp xếp danh sách trong Java là một cách tiện lợi. Nó  sắp xếp danh sách của bất kỳ đối tượng nào (các đối tượng triển khai giao diện Comparable hoặc cung cấp một Comparator riêng).
             //
-        } else if (fieldChoice.equals("price")) {
+        } else if (fieldChoice.equalsIgnoreCase("Price")) {
             Collections.sort(this, new BrandPriceComparator());
         } else if (fieldChoice.equals("no")) {
         System.out.println("Brands have not been sorted.");
@@ -244,6 +249,8 @@ public class BrandList extends ArrayList<Brand> {
             return b1.getBrandID().compareTo(b2.getBrandID());
         }
     }
+    //triển khai để so sánh hai đối tượng Brand, b1 và b2.
+    //
 
     class BrandPriceComparator implements Comparator<Brand> {
 
