@@ -111,7 +111,7 @@ public class BrandList extends ArrayList<Brand> {
 
         System.out.println("Brand has been added successfully");
     }
-    //dev by Trần Đình Tú
+    //tìm kiếm id, name, sound hoặc price trong brand - dev by Trần Đình Tú
     public void search() {
         List<Brand> matchingBrands = new ArrayList<>();
         System.out.println("Do you want to search for ID, name, sound, or price: ");
@@ -198,7 +198,7 @@ public class BrandList extends ArrayList<Brand> {
             return this.get(pos);
         }
     }
-    // dev by Trần Đình Tú
+    //sắp xếp thứ tự brand theo id hoặc price - dev by Trần Đình Tú
     public void listBrands()  { 
         if (this.isEmpty()) {
         System.out.println("No brands to display.");
