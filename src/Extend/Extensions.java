@@ -49,6 +49,18 @@ public class Extensions {
         }
         return num;
     }
+    public static double getDouble(String inputMsg) {
+        double n;
+        while (true) {
+            try {
+                System.out.print(inputMsg);
+                n = Double.parseDouble(sc.nextLine());
+                return n;
+            } catch (Exception e) {
+                System.out.println("Price must be real number");
+            }
+        }
+    }
     public static String getID(String inputID, String outputSring, String format) {
         String id;
         boolean match;
