@@ -8,7 +8,7 @@
  *
  * @author Admin
  */
-package assignment;
+package Assign;
 import java.util.*;
 import java.lang.*;
 public class Car {
@@ -74,11 +74,11 @@ public class Car {
     public String toString() {
         return  "carID: " + carID + ", brand: " + brand.brandID + ", color: " + color + ", frameID: " + frameID + ", engineID: " + engineID + '}';
     }
-    
     public int comparedTo(Car car) {
-        int d = this.getBrand().getBrandName().compareTo(car.brand.getBrandName());
-        if (d!=0) return d;
-        return this.carID.compareTo(car.carID); 
+        int d = this.brand.getBrandName().compareTo(car.brand.getBrandName());
+        if (d!=0) 
+            return 0;
+        return this.carID.compareTo(car.carID);
     }
     
     public String screenString() {

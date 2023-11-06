@@ -4,46 +4,42 @@
  * and open the template in the editor.
  */
 package Main;
-
 import Extend.Extensions;
-import assignment.BrandList;
-import assignment.CarList;
-import assignment.Menu;
+import Assign.BrandList;
+import Assign.CarList;
+import Assign.Menu;
 import java.lang.*;
 import java.util.*;
 import java.math.*;
-
-public class CarManager {
+public class Main {
 
     public static void main(String[] args) {
-        Menu menu = new Menu("Car Manager Application");
-        boolean isrun = true;
+        boolean run = true;
         int choice;
         BrandList brandList = new BrandList();
-        CarList carList = new CarList();
-        Menu options = new Menu();
-        options.addOptions("List all brands");
-        options.addOptions("Add a new brand");
-        options.addOptions("Search a brand based on its ID");
-        options.addOptions("Update a brand");
-        options.addOptions("Save brands to the file");
-        options.addOptions("List all cars in ascending order of brand names");
-        options.addOptions("List cars based on a part of an input brand name");
-        options.addOptions("Add a car");
-        options.addOptions("Remove a car based on its ID");
-        options.addOptions("Update a car based on its ID");
-        options.addOptions("Save cars to file, named cars.txt");
-        options.addOptions("Load brand from file");
-        options.addOptions("Load car from file");
-        options.addOptions("generate new random brand!!");
-        options.addOptions("Quit the program");
+        CarList carList = new CarList(brandList);
+        String[] options = {
+            "List all brands",
+            "Add a new brand",
+            "Search a brand based on its ID",
+            "Update a brand",
+            "Save brands to the file",
+            "Generate random Brands",
+            "List all cars in ascending order of brand names",
+            "List cars based on part of an input brand name",
+            "Add a car",
+            "Generate random Cars",
+            "Remove a car based on its ID",
+            "Update a car based on its ID",
+            "Save cars to file, named cars.txt",
+            "Quit the program"};
+
         do {
-            /*menu.printMenu();*/
-            choice = Menu.int_getChoice();
+            choice = Menu.getChoice(options);
             switch (choice) {
                 case 1:
                     brandList.listBrands();
-                    /*Extensions.getString("Press Enter to continue");*/
+                    Extensions.getString("Press Enter to continue");
                     break;
                 case 2:
                     brandList.addBrand();
@@ -60,48 +56,46 @@ public class CarManager {
                 case 5:
                     brandList.saveToFile("Brand.txt");
                     Extensions.getString("Press Enter to continue");
-                    break;
+                    break;    
                 case 6:
-                    carList.listCars();
+                    brandList.genRandomBrand();
                     Extensions.getString("Press Enter to continue");
                     break;
                 case 7:
-                    carList.listCarsByBrand();
+                    carList.listCars();
                     Extensions.getString("Press Enter to continue");
                     break;
                 case 8:
-                    carList.addCar();
+                    carList.printBasedBrandName();
                     Extensions.getString("Press Enter to continue");
                     break;
                 case 9:
-                    carList.removeCar();
+                    carList.addCar();
                     Extensions.getString("Press Enter to continue");
                     break;
                 case 10:
-                    carList.updateCar();
+                    carList.genRandomCar();
                     Extensions.getString("Press Enter to continue");
                     break;
                 case 11:
-                    carList.saveToFile("Cars.txt");
+                    carList.removeCar();
                     Extensions.getString("Press Enter to continue");
                     break;
                 case 12:
-                    brandList.loadFromFile("E:\\JavaProject\\Assignment\\src\\assignment\\Brand.txt");
+                    carList.updateCar();
                     Extensions.getString("Press Enter to continue");
                     break;
                 case 13:
-                    carList.loadFromFile("E:\\JavaProject\\Assignment\\src\\assignment\\Cars.txt");
+                    carList.saveToFile("Cars.txt");
                     Extensions.getString("Press Enter to continue");
                     break;
                 case 14:
-                    brandList.genRandomBrand();
+                    run = false;
                     break;
-                case 15:
-                    System.exit(0);
                 default:
                     System.out.println("Invalid choice. Please choose again.");
             }
-        } while (isrun);
+        } while (run);
     }
 
 }

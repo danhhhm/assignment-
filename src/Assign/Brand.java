@@ -1,10 +1,9 @@
-package assignment;
+
+package Assign;
 
 import java.util.*;
 import java.lang.*;
-
 public class Brand {
-
     String brandID;
     private String brandName;
     private String soundBrand;
@@ -54,7 +53,9 @@ public class Brand {
 
     @Override
     public String toString() {
-        return "brandID= " + brandID + ", brandName= " + brandName + ", soundBrand= " + soundBrand + ", price= " + price;
+        return  "brandID= " + brandID + ", brandName= " + brandName + ", soundBrand= " + soundBrand + ", price= " + price ;
     }
-
+    
+    
+    
 }
