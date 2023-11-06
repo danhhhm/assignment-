@@ -49,7 +49,7 @@ public class Extensions {
         }
         return num;
     }
-    public static double getDouble(String inputMsg) {
+    public static double getDouble(String inputMsg) { // hàm này để lấy price là số -- dev by Đình Tú
         double n;
         while (true) {
             try {

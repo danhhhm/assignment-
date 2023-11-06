@@ -111,7 +111,7 @@ public class BrandList extends ArrayList<Brand> {
 
         System.out.println("Brand has been added successfully");
     }
-
+    //dev by Trần Đình Tú
     public void search() {
         List<Brand> matchingBrands = new ArrayList<>();
         System.out.println("Do you want to search for ID, name, sound, or price: ");
@@ -122,7 +122,7 @@ public class BrandList extends ArrayList<Brand> {
                 if (this.get(i).getBrandID().equals(ID)) {
                     System.out.println("Found: " + this.get(i).toString());
                     return;
-                }
+                } // hàm này để nhập vào ID muốn tìm kiếm
             }
             System.out.println("Not found Brand with ID" + ID);
         } else if (Choice.equalsIgnoreCase("name")) {
@@ -131,8 +131,8 @@ public class BrandList extends ArrayList<Brand> {
                 if (this.get(i).getBrandName().equals(name)) {
                     System.out.println("Found: " + this.get(i).toString());
                     return;
-                }
-            }
+                } // hàm này để nhập vào tên của brand muốn tìm kiếm
+            }//dev by Đình Tú
 
         } else if (Choice.equalsIgnoreCase("sound")) {
             String sound = Extensions.getString("Enter the sound of brand you want to search: ");
@@ -140,22 +140,24 @@ public class BrandList extends ArrayList<Brand> {
                 if (this.get(i).getSoundBrand().contains(sound)) {
                     matchingBrands.add(this.get(i));
                 }
-            }
+            }// hàm này để nhập vào sound brand muốn tìm kiếm
+            // dev by Đình Tú
+            
             if (matchingBrands.isEmpty()) {
-                System.out.println("No matching brands found.");
+                System.out.println("No matching brands found."); // nếu như không tìm thấy thì sẽ báo không thấy
             } else {
                 System.out.println("Found matching brands:");
                 for (Brand matchingBrand : matchingBrands) {
-                    System.out.println(matchingBrand.toString());
+                    System.out.println(matchingBrand.toString()); // báo tìm được và in ra
                 }
             }
-        } else if (Choice.equalsIgnoreCase("Price")) {
+        } else if (Choice.equalsIgnoreCase("Price")) { // dev by Đức Anh
             double minPrice = Extensions.getDouble("Enter the minimum price: ");
             double maxPrice = Extensions.getDouble("Enter the maximum price: ");
             for (int i = 0; i < this.size(); i++) {
                 double price = this.get(i).getPrice();
-                if (price >= minPrice && price <= maxPrice) {
-                    matchingBrands.add(this.get(i));
+                if (price >= minPrice && price <= maxPrice) { 
+                    matchingBrands.add(this.get(i)); 
                 }
             }
             if (matchingBrands.isEmpty()) {
@@ -164,7 +166,7 @@ public class BrandList extends ArrayList<Brand> {
                 System.out.println("Found matching brands:");
                 for (Brand matchingBrand : matchingBrands) {
                     System.out.println(matchingBrand.toString());
-                }
+                } // hàm này để tìm kiếm mức price phù hợp từ a đến b
             }
         }
 
@@ -196,8 +198,8 @@ public class BrandList extends ArrayList<Brand> {
             return this.get(pos);
         }
     }
-
-    public void listBrands() {
+    // dev by Trần Đình Tú
+    public void listBrands()  { 
         if (this.isEmpty()) {
         System.out.println("No brands to display.");
         // Thực hiện các hành động khác nếu cần
@@ -207,16 +209,16 @@ public class BrandList extends ArrayList<Brand> {
         System.out.println(String.format("%-5s. || %-15s || %-20s || %-20s || %-10s", "STT", "BrandID", "BrandName", "SoundBrand", "Price"));
         for (Brand b : this) {
             System.out.println(String.format("%-5s. || %-15s || %-20s || %-20s || %-10s", i, b.getBrandID(), b.getBrandName(), b.getSoundBrand(), b.getPrice()));
-            i++;
+            i++;// giao diện của list
         }
         System.out.println("Do you want to sort the brands?");
         System.out.println("Chose(ID/Price/No): ");
-        String fieldChoice = sc.next();
+        String fieldChoice = sc.next(); 
         if (fieldChoice.equalsIgnoreCase("ID")) {
             Collections.sort(this, new BrandIDComparator());
             //b1 b2 là đối tượng được generate từ random brand, b1.getBrandId là lấy id b1 so sánh với id b2
             //Dùng Collections.sort để sắp xếp danh sách trong Java là một cách tiện lợi. Nó  sắp xếp danh sách của bất kỳ đối tượng nào (các đối tượng triển khai giao diện Comparable hoặc cung cấp một Comparator riêng).
-            //
+            //dev by Đình Tú
         } else if (fieldChoice.equalsIgnoreCase("Price")) {
             Collections.sort(this, new BrandPriceComparator());
         } else if (fieldChoice.equals("no")) {
@@ -237,7 +239,7 @@ public class BrandList extends ArrayList<Brand> {
         System.out.println("Brand has been sorted in increasing order!");
         }
         else if (orderChoice.equals("dec")){
-            Collections.reverse(this);
+            Collections.reverse(this); // đảo ngược lại sắp xếp từ trên xuống dưới
             System.out.println("Brand has been sorted in decreasing order!");    
         } else System.out.println("Invalid choice for sorting order.");
     
@@ -249,8 +251,8 @@ public class BrandList extends ArrayList<Brand> {
             return b1.getBrandID().compareTo(b2.getBrandID());
         }
     }
-    //triển khai để so sánh hai đối tượng Brand, b1 và b2.
-    //
+    //triển khai để so sánh hai đối tượng Brand, b1 và b2 bằng ID.
+    //dev by Đình Tú
 
     class BrandPriceComparator implements Comparator<Brand> {
 
@@ -258,6 +260,7 @@ public class BrandList extends ArrayList<Brand> {
         public int compare(Brand b1, Brand b2) {
             return Double.compare(b1.getPrice(), b2.getPrice());
         }
-
+    //triển khai để so sánh hai đối tượng Brand, b1 và b2 bằng Price.
+    //dev by Đình Tú
     }
 }
