@@ -11,7 +11,7 @@ import java.lang.*;
 
 public class Menu {
 
-    
+    //để người dùng nhập yêu cầu là integer - Dev by QuocDat
     public static int getChoice(Object[] option) {
         int i = 0;
         for (Object object : option) {
@@ -24,6 +24,7 @@ public class Menu {
         return choice;
     }
     
+    //để người dùng nhập yêu cầu là object- Dev by QuocDat
     public static Object ref_getChoice(ArrayList<Object> option){
 
        Object[] brandarr = option.toArray();

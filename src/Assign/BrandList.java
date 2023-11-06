@@ -10,7 +10,7 @@ import Extend.Extensions;
 import java.io.*;
 import java.util.*;
 
-public class BrandList extends ArrayList<Brand> {
+public class BrandList extends ArrayList<Brand> { 
     private String brandID, brandName, soundBrand;
     private double price;
     private Scanner sc = new Scanner(System.in);
@@ -19,39 +19,41 @@ public class BrandList extends ArrayList<Brand> {
 
     public BrandList() {
     }
-
-     public boolean loadFromFile(String filename) {
+    
+    //load file nội dung có sẵn - Dev by QuocDat
+    public boolean loadFromFile(String filename) {
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
             String[] arr;
-            String line = br.readLine();
-            while ((line != null)) {
-                arr = line.split(",");
-                brandID = arr[0].trim();
+            String line = br.readLine(); 
+            while ((line != null)) { //nếu không phải khoảng trắng thì thực hiện vòng lặp
+                arr = line.split(","); 
+                brandID = arr[0].trim(); //vị trí đầu để brandID xóa đi khoảng trắng
                 brandName = arr[1].trim();
-                soundBrand = arr[2].split(":")[0].trim();
-                price = Double.parseDouble(arr[2].split(":")[1].trim());
+                soundBrand = arr[2].split(":")[0].trim(); //vị trí 3 sau khi split và xóa khoảng trắng ở vị trí đầu
+                price = Double.parseDouble(arr[2].split(":")[1].trim());//ép kiểu về double 
                 this.add(new Brand(brandID, brandName, soundBrand, price));
                 brandIDList.add(brandID);
                 line = br.readLine();
             }
             br.close();
             return true;
-        } catch (IOException e) {
+        } catch (IOException e) { 
             System.out.println("File " + filename + " not found !");
         }
         return false;
     }
 
+    //save nội dung đã đổi vào file gốc - Dev by QuocDat
     public boolean saveToFile(String filename) {
         try (PrintWriter pw = new PrintWriter(new FileWriter(filename))) {
-            for (Brand brand : this) {
+            for (Brand brand : this) { //duyệt cả file 
                 String line = brand.getBrandID() + ", " + brand.getBrandName() + ", " + brand.getSoundBrand() + ": " + brand.getPrice();
-                pw.println(line);
+                pw.println(line); //in vào file 
             }
             pw.close();
             return true;
         } catch (IOException e) {
-            e.printStackTrace();
+            e.printStackTrace(); //false thì tạo một ngoại lệ in ra lỗi
         }
         return false;
     }
@@ -70,14 +72,15 @@ public class BrandList extends ArrayList<Brand> {
         System.out.println(num + " brand(s) has been generated!");
     }
 
-        public int searchID(String bID) {
-            for (int i = 0; i < this.size(); i++) {
-                if (bID.equals(this.get(i).getBrandID())) {
-                    return i;
-                }
+    //tìm brand theo ID - Dev by QuocDat
+    public int searchID(String bID) {
+        for (int i = 0; i < this.size(); i++) {
+            if (bID.equals(this.get(i).getBrandID())) { //duyệt mảng tìm giá trị y hệt thì trả về 
+                return i;
             }
-            return -1;
         }
+        return -1;
+    }
 
     public Brand getUserChoice() {
         int i = 1;
@@ -90,20 +93,20 @@ public class BrandList extends ArrayList<Brand> {
         return this.get(choice - 1);
     }
 
+    //add brand vào list - Dev by QuocDat
     public void addBrand() {
         int pos;
         String brandID;
         do {
             brandID = Extensions.getID("Input brand ID: ");
-            pos = searchID(brandID);
-            if (pos >= 0) {
+            pos = searchID(brandID); //tìm ID để xem ID muốn nhập đã tồn tại chưa
+            if (pos >= 0) { //vị trí đã có trong list thì báo trùng
                 System.out.println("This brand ID is existed. Try another one!");
             }
-        } while (pos != -1);
-
-         brandName = Extensions.getString("Input brand name: ");
-         soundBrand = Extensions.getString("Input sound brand: ");
-         price = Extensions.getPrice("Input price: ", 0, 100000);
+        } while (pos != -1); //vị trí không tồn tại trong list thì nhập các dữ liệu của brand
+            brandName = Extensions.getString("Input brand name: ");
+            soundBrand = Extensions.getString("Input sound brand: ");
+            price = Extensions.getPrice("Input price: ", 0, 100000);
         this.add(new Brand(brandID, brandName, soundBrand, price));
 
         System.out.println("Brand has been added successfully");
@@ -168,13 +171,13 @@ public class BrandList extends ArrayList<Brand> {
     }
 
     
-
+    //cập nhật brand với dữ liệu mới - Dev by QuocDat
     public void updateBrand() {
         String brandID = Extensions.getString("Enter brand ID: ");
-        int index = searchID(brandID);
-        if (index == -1) {
+        int index = searchID(brandID); //Nhập vào ID muốn thay đổi 
+        if (index == -1) { //vị trí k tồn tại trong list thì báo k có
             System.out.println("Not found brand ID!");
-        } else {
+        } else { //còn lại thì nhập dữ liệu bthg
              brandName = Extensions.getString("Enter brand name: ");
              soundBrand = Extensions.getString("Enter sound brand: ");
              price = Extensions.getPrice("Enter price: ", 0d, 100000000000d);
@@ -184,7 +187,7 @@ public class BrandList extends ArrayList<Brand> {
         }
     }
     
-
+    //lấy vị trí của brand - Dev by QuocDat
     public Brand getBrand(String brandID) {
         int pos = searchID(brandID);
         if (pos == -1) {

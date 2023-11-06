@@ -3,7 +3,8 @@ package Assign;
 
 import java.util.*;
 import java.lang.*;
-public class Brand {
+//gồm contructor, get, set, toString để nhập, lấy, đặt lại giá trị và in ra (InsertCode) - Dev by QuocDat
+public class Brand { 
     String brandID;
     private String brandName;
     private String soundBrand;
