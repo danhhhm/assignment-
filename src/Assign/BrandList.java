@@ -195,6 +195,11 @@ public class BrandList extends ArrayList<Brand> {
     }
 
     public void listBrands() {
+        if (this.isEmpty()) {
+        System.out.println("No brands to display.");
+        // Thực hiện các hành động khác nếu cần
+        return; // Thoát ra khỏi phương thức nếu danh sách rỗng
+    }
         int i = 1;
         System.out.println(String.format("%-5s. || %-15s || %-20s || %-20s || %-10s", "STT", "BrandID", "BrandName", "SoundBrand", "Price"));
         for (Brand b : this) {
@@ -241,6 +246,8 @@ public class BrandList extends ArrayList<Brand> {
             return b1.getBrandID().compareTo(b2.getBrandID());
         }
     }
+    //triển khai để so sánh hai đối tượng Brand, b1 và b2.
+    //
 
     class BrandPriceComparator implements Comparator<Brand> {
 
